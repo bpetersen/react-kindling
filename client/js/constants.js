@@ -5,6 +5,7 @@ export default {
   // User 
   LOGIN: "login",
   LOGIN_PENDING: "login_pending",
+  LOGIN_SUCCESS: "login_success",
   REGISTER: "register",
   REGISTER_PENDING: "register_pending",
 

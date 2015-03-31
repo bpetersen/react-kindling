@@ -27,18 +27,19 @@ function makeUrl(part) {
 }
 
 // GET request with a token param
-function get(url) {
+function get(url, callback) {
   return Request
     .get(url)
     .timeout(TIMEOUT)
     .set('Accept', 'application/json')
     .query({
       authtoken: token()
-    });
+    })
+    .end(callback);
 }
 
 // POST request with a token param
-function post(url, body) {
+function post(url, body, callback) {
   return Request
     .post(url)
     .send(body)
@@ -46,7 +47,8 @@ function post(url, body) {
     .timeout(TIMEOUT)
     .query({
       authtoken: token()
-    });
+    })
+    .end(callback);
 }
 
 function dispatch(key, response) {
@@ -80,15 +82,15 @@ function doRequest(key, url, callback){
 
 export default {
 
-  get(key, url){
+  get(key, url, callback){
     return doRequest(key, url, function(fullUrl){
-      return get(fullUrl);
+      return get(fullUrl, callback);
     });
   },
 
-  post(key, url, body){
+  post(key, url, body, callback){
     return doRequest(key, url, function(fullUrl){
-      return post(fullUrl, body);
+      return post(fullUrl, body, callback);
     });
   }
 
