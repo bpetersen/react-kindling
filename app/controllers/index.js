@@ -66,7 +66,18 @@ module.exports = function(app){
         apiPath = settings.devApplicationUrl + '/';
       }
 
+      var displayName = "";
+      var email = "";
+      var loggedIn = false;
+      if(req.user){
+        displayName = req.user.displayName();
+        loggedIn = true;
+      }
+
       res.render('index.ejs', {
+        displayName: displayName,
+        email: email,
+        loggedIn: loggedIn,
         content: content,
         scriptPath: scriptPath,
         cssPath: cssPath,
