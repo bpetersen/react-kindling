@@ -24,10 +24,12 @@ module.exports = function(release){
 
     // Configure entries with hotloader
     var originalEntries = settings.scripts.paths.entries;
+    console.log(originalEntries);
     entries = {};
     for(var name in originalEntries){
       entries[name] = ['webpack-dev-server/client?http://localhost:' + settings.ports.hotPort, 'webpack/hot/only-dev-server', originalEntries[name]];
     }
+    console.log(entries);
   }
 
   var cssEntries = settings.styles.paths.entries;

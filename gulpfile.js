@@ -13,7 +13,8 @@ var gulpif        = require('gulp-if');
 var replace       = require('gulp-replace');
 var rename        = require('gulp-rename');
 var shell         = require('gulp-shell');
-var nodemon       = require('gulp-nodemon');
+var debug         = require('gulp-debug');
+//var nodemon       = require('gulp-nodemon');
 
 var webpackDevServer  = require('webpack-dev-server');
 var runSequence       = require('run-sequence');
@@ -113,7 +114,7 @@ gulp.task('html', function(){
     .pipe(rename({ extname: "" }))
     .pipe(rename({ extname: ".html" }));
       
-  if(release){
+  if(!release){
     return html
       .pipe(embedlr())
       .pipe(gulp.dest(settings.html.paths.output.dev));
@@ -126,27 +127,28 @@ gulp.task('html', function(){
 
 // Launch the node server
 gulp.task('serve:node', ['build'], function(){
-  var assign = require('react/lib/Object.assign');
-  nodemon({
-    script: path.join(__dirname, './server.js'),
-    ext: 'js html',
-    execMap: {
-      js: "node --debug"
-    },
-    env: assign({ NODE_ENV: 'development' }, process.env)
-  });
+ // var assign = require('react/lib/Object.assign');
+ // nodemon({
+ //   script: path.join(__dirname, './server.js'),
+ //   ext: 'js html',
+ //   execMap: {
+ //     js: "node --debug"
+ //   },
+ //   env: assign({ NODE_ENV: 'development' }, process.env)
+ // });
 });
 
 // Run webpack hot reload server
 gulp.task('serve:webpack', function(){
   
   gutil.log('Starting Webpack hot load server');
+  gutil.log('Path: ' + webpackConfig.output.publicPath);
 
   new webpackDevServer(webpack(webpackConfig), {
     //contentBase: 'http://localhost:' + settings.ports.hotPort,
     publicPath: webpackConfig.output.publicPath,
     hot: true,
-    noInfo: true,
+    noInfo: false,
     headers: { "Access-Control-Allow-Origin": "*" }
   }).listen(settings.ports.hotPort, 'localhost', function(err, result){
     if(err){

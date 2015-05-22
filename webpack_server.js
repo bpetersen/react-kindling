@@ -16,4 +16,5 @@ new webpackDevServer(webpack(webpackConfig), {
     throw new gutil.PluginError('webpack-dev-server', err);
   }
   console.log('Webpack hot load server listening on port ' + settings.ports.hotPort);
+  console.log('Webpack hot load server using public path ' + webpackConfig.output.publicPath);
 });

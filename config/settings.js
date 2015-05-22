@@ -27,7 +27,7 @@ module.exports = {
   // If projectType is 'client' then pages from client/html will be used
   // If projectType is 'client-server' page from client/html will be ignored in the build
   // and node will serve pages from app/views instead
-  projectType: 'client-server',
+  projectType: 'client',
 
   // Used by pageSpeed. This should be the url of your production server
   applicationUrl: 'http://www.example.com',
@@ -43,7 +43,6 @@ module.exports = {
     livereload: 35729
   },
   appFiles: [
-    './server.js',
     './app/**/*'
   ],
   assets: {

@@ -3,6 +3,7 @@
 // include action creators
 import Api         from   "./WebAPI";
 import Constants   from   "../constants";
+import Dispatcher  from   "flux";
 
 export default {
   login(payload){
@@ -11,8 +12,8 @@ export default {
         Dispatcher.dispatch({ action: Constants.LOGIN_SUCCESS });
       }
       else {
-        console.log('There was an error logging in user');
-        Dispatcher.dispatch({ action: Constants.LOGIN_FAILURE,}
+        //console.log('There was an error logging in user');
+        Dispatcher.dispatch({ action: Constants.LOGIN_FAILURE,});
       }
 
     });
